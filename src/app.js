@@ -1,17 +1,20 @@
+import mongoose from 'mongoose';
 import express from 'express';
-import { port } from './config/index.js';
+import { port, db_uri } from './config/index.js';
 
 const app = express();
 
-app.get('/', (req, response, error) => {
+app.get('/', (request, response, error) => {
 
     response.send('status: ok')
 
 })
 
-app.post('/1', (request, response, error) => {
-  response.send('posteando')
-})
+//Database connection
+mongoose
+  .connect(db_uri)
+  .then(() => {console.log('Database connection successful')})
+  .catch((error) => {console.error('Database connection error')});
 
 app.listen(port, (error) => {
 
@@ -22,4 +25,4 @@ app.listen(port, (error) => {
     
     console.log(`Server listening in port ${port} `)
 })
-console.log('puerto', port)
+
