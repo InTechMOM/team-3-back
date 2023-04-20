@@ -1,7 +1,13 @@
-const mongoose = require(mongoose);
+import mongoose from 'mongoose';
 
-//password = 'Autobus1';
-//username = 'Administrador de atlas';
-const db_uri = `mongodb+srv://Administrador de atlas:Autobus1@atlascluster.3pc47up.mongodb.net/test`;
+//Database connection
+class database {
+  constructor() {
+   mongoose
+      .connect(db_uri)
+      .then(() => {console.log('Database connection successful')})
+      .catch((error) => {console.error('Database connection error')});
+  }
+}
 
-module.exports = async () => await mongoose.connect(db_uri, {useNewUrlPrser: true, useUniFiedTopology: true});
+  export { database as default }
