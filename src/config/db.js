@@ -1,13 +1,14 @@
 import mongoose from 'mongoose';
+import {db_uri} from './index.js'
 
 //Database connection
-class database {
+class Database {
   constructor() {
-   mongoose
+    mongoose
       .connect(db_uri)
       .then(() => {console.log('Database connection successful')})
-      .catch((error) => {console.error('Database connection error')});
+      .catch((error) => {console.error('Database connection error', error)});
   }
 }
 
-  export { database as default }
+  export { Database as default }

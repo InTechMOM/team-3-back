@@ -1,8 +1,9 @@
 import express from 'express';
 import { port } from './config/index.js';
-import database from './config/db.js';
+import Database from './config/db.js';
 
 const app = express();
+const db = new Database();
 
 app.get('/', (request, response, error) => {
 
