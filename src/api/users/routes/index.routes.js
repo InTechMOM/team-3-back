@@ -13,11 +13,13 @@ router.get('/', async (request, response, error) => {
 });
 
 router.post('/login', async (request, response) => {
-  const user = User(request.body);
-
-  await user.save();
-
-  response.redirect('/');
+  try {
+    const user = User(request.body);
+    await user.save();
+    response.redirect('/');
+  } catch (error){
+    console.log(error);
+  }
 
 });
 
