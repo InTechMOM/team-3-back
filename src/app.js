@@ -10,6 +10,7 @@ dbConnection();
 
 //middlewares
 app.use(morgan('dev'));
+app.use(express.urlencoded({extended: false}));
 
 // Routes
 app.use(indexRoutes)

@@ -1,14 +1,23 @@
 import { Router } from 'express'
+import User from '../../../models/users.js'
+
+
 const router = Router()
 
-router.get('/', (request, response, error) => {
+router.get('/', async (request, response, error) => {
 
-  response.send('status: ok')
+  const user = await User.find();
+  response.send('status: ok');
 
 });
 
-router.post('/user', (request, response) => {
-  response.send('saved')
-})
+router.post('/login', async (request, response) => {
+  const user = User(request.body);
+
+  await user.save();
+
+  response.redirect('/');
+
+});
 
 export default router;

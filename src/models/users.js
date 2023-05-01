@@ -1,9 +1,7 @@
 import {Schema, model} from 'mongoose'
-const mongoose = require('mongoose');
-const Schema  = mongoose.Schema;
 
 
-const user = new Schema({
+const userShema = new Schema({
 
   name: {
     type: String,
@@ -28,7 +26,7 @@ const user = new Schema({
   
 },{
   timestamps: true,
-  creationDate: { Date, default: Date.toISOString() },
+  versionKey: false,
 });
 
-export default model('User', user);
+export default model('User', userShema);
