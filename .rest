@@ -1,0 +1,14 @@
+###
+Send Request
+POST  http://localhost:3000/
+content-type: application/json
+
+{
+  "name": "Karen",
+	"lastname": "Echavarria",
+	"email": "some@example.com",
+	"rol": "student",
+
+}
+
+### 

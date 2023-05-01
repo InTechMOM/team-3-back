@@ -1,21 +1,24 @@
 import express from 'express';
+import indexRoutes from './api/users/routes/index.routes.js';
 import { port } from './config/index.js';
-import Database from './config/db.js';
+import dbConnection from './config/db.js';
+import morgan from 'morgan';
+
 
 const app = express();
-const db = new Database();
+dbConnection();
 
-app.get('/', (request, response, error) => {
+//middlewares
+app.use(morgan('dev'));
 
-    response.send('status: ok')
-
-})
+// Routes
+app.use(indexRoutes)
 
 app.listen(port, (error) => {
 
     if(error){
-        console.log('Server errror: Failed')
-        process.exit(1)
+        console.log('Server errror: Failed');
+        process.exit(1);
     }
     
     console.log(`Server listening in port ${port} `)

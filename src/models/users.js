@@ -1,15 +1,34 @@
+import {Schema, model} from 'mongoose'
 const mongoose = require('mongoose');
 const Schema  = mongoose.Schema;
 
 
-const userSchema = new Schema({
+const user = new Schema({
 
-  name: String,
-  lastname: String,
-  email: { String, unique:true, lowercase: true },
-  rol: String,
-  creationDate: { Date, default: Date.toString() },
-
+  name: {
+    type: String,
+    require: true,
+    trim: true,
+  },
+  lastname: {
+    type: String,
+    require: true,
+    trim: true,
+  },
+  email: { 
+    type: String, 
+    unique:true, 
+    lowercase: true 
+  },
+  rol: {
+    type: String, 
+    required: true, 
+    enum: ['student', 'teacher']
+  },
+  
+},{
+  timestamps: true,
+  creationDate: { Date, default: Date.toISOString() },
 });
 
-module.exports = mongoose.model('User', userSchema)
+export default model('User', user);
