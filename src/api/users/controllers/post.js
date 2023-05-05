@@ -1,9 +1,12 @@
 import User from '../../../models/users.js'
 
+
 export const createUser = async (request, response) => {
   try {
-    const user = User(request.body);
-    await user.save();
+    console.log(request.body);
+    const user = await User.create(request.body);
+    //await user.save();
+    
     response.send('Saved');
   } catch (error){
     console.log(error);

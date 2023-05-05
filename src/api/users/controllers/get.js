@@ -1,16 +1,20 @@
 import User from '../../../models/users.js'
 
 export const renderUsers = async (request, response, error) => {
+  console.log(request.query.email);
+  if(request.query.email){
+    const users = await User.find({email: request.query.email}).exec();
+    return response.send(users);
+  };
   const user = await User.find().lean()
-  //connection with front: response.render("index", {user: user});
-  response.send('status: ok')
+  return response.send(user)
 };
 
 //Get by id
 export const renderUserEdit = async (request, response, error) => {
 
   try {
-    const user = await User.findById(request.params.id).lean();
+    const user = await User.exists({email: request.body.email});
   //connection with front: response.render("edit", {user: user});}
   } catch (error) {
     console.log(error.message);

@@ -13,8 +13,8 @@ const createUserSchema = Joi.object({
   email: Joi.string()
     .email()
     .required(),
-  rol: Joi.array()
-    .items(Joi.string().valid('student', 'teacher'))
+  rol: Joi.string()
+    .valid('student', 'teacher')
     .required(),
 })
 

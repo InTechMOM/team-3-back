@@ -21,8 +21,8 @@ const userShema = new Schema({
     require: true
   },
   rol: {  
-    type: Array,
-    default : ['student', 'teacher'],
+    type: String,
+    enum : ['student', 'teacher'],
     require: true
   },
   

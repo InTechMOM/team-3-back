@@ -15,7 +15,7 @@ import {
 
 const router = Router()
 
-router.get('/', renderUsers);
+router.get('/users', renderUsers);
 router.post('/user/login', validateCreation, createUser);
 
 // Update by id
