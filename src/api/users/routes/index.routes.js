@@ -1,44 +1,28 @@
 import { Router } from 'express'
-import User from '../../../models/users.js'
+import validateCreation from '../validation/post.js'
+//const validateInformation= require('../../../app.js')
 
+import { 
+  renderUserEdit, 
+  renderUsers, 
+  userToggleDone 
+} from '../controllers/get.js';
+
+import { 
+  createUser, 
+  editUser 
+} from '../controllers/post.js';
 
 const router = Router()
 
-router.get('/', async (request, response, error) => {
-
-  const user = await User.find().leand();
-  //connection with front: response.render("index", {user: user});
-  response.send('status: ok');
-
-});
-
-router.post('/login', async (request, response) => {
-  try {
-    const user = User(request.body);
-    await user.save();
-    response.redirect('/');
-  } catch (error){
-    console.log(error);
-  }
-});
+router.get('/', renderUsers);
+router.post('/user/login', validateCreation, createUser);
 
 // Update by id
-router.get('/edit/:id', async (request, response, error) => {
+router.get('/user/:id/edit',renderUserEdit);
+router.post('/user/:id/edit', editUser);
 
-  try {
-    const user = await User.findById(request.params.id).lean();
-  //connection with front: response.render("edit", {user: user});}
-  } catch (error) {
-    console.log(error.message);
-  }
-  
-});
-
-router.post('/edit/:id', async (request, response) =>{
-
-  const {id} = request.params;
-  await User.findByIdAndUpdate(id, request.body);
-  response.redirect('/');
-})
+//Toggle Done
+router.get('/user/:id/toggleDone', userToggleDone);
 
 export default router;

@@ -16,12 +16,14 @@ const userShema = new Schema({
   email: { 
     type: String, 
     unique:true, 
-    lowercase: true 
+    lowercase: true, 
+    sparse: true,
+    require: true
   },
-  rol: {
-    type: String, 
-    required: true, 
-    enum: ['student', 'teacher']
+  rol: {  
+    type: Array,
+    default : ['student', 'teacher'],
+    require: true
   },
   
 },{

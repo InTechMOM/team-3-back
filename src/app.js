@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { request, response } from 'express';
 import indexRoutes from './api/users/routes/index.routes.js';
 import { port } from './config/index.js';
 import dbConnection from './config/db.js';
@@ -11,6 +11,16 @@ dbConnection();
 //middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
+
+/*module.exports = (schema) => {
+    return async(request, response, next) => {
+        try {
+            await schema.validateAsync(request.body);
+        } catch (error) {
+            response.send(error.messaje)
+        }
+    };
+};*/
 
 // Routes
 app.use(indexRoutes)
