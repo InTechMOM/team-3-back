@@ -1,22 +1,33 @@
 import User from '../../../models/users.js'
 
-
-export const createUser = async (request, response) => {
+const createUser = async (req, res) => {
   try {
-    console.log(request.body);
-    const user = await User.create(request.body);
-    //await user.save();
-    
-    response.send('Saved');
+    console.log(req.body);
+    const user = await User.create(req.body);
+    res.json(`${user} saved`);
   } catch (error){
     console.log(error);
+    res.json({message: error});
   }
 };
 
-export const editUser = async (request, response) =>{
+const editUser = async (req, res) => {
 
-  const { id } = request.params;
-  await User.findByIdAndUpdate(id, request.body);
-  respose.statusCode(200).send('')
-  //permite que front reciba el estado, un mensaje o un objeto, modificar response.redirect
+  const { id } = req.params;
+  const {name, lastname, email, rol} = req.params;
+ /* await User
+    .updateOne({_id: id},{ $set:{ name, lastname, email, rol }})
+    .then(data) => res.json(data)
+    .catch(error) => res.json(data)*/
+  res.statusCode(200).json(`${email} update`)
+}
+
+
+const deleteOne = async(req,res) => {
+  const { id } = req.params;
+  const removed = await User.findByIdAndDelete(id);
+  console.log(removed);
+  res.json(`${removed} delete from database`)
 };
+
+export  {createUser, editUser, deleteOne}

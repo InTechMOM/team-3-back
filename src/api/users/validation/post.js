@@ -16,17 +16,16 @@ const createUserSchema = Joi.object({
   rol: Joi.string()
     .valid('student', 'teacher')
     .required(),
-})
+});
 
-const updatePeopleSchema =  Joi.object({
+const loginUserSchema = Joi.object({
   email: Joi.string()
     .email()
     .required(),
   rol: Joi.string()
-    .valid('teacher','student')
+    .valid('student', 'teacher')
     .required(),
-})
-
+});
 
 const validateCreation = async(request, response, next) => {
   await createUserSchema.validate(request.body);

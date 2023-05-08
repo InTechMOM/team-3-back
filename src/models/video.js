@@ -1,29 +1,33 @@
 import {Schema, model} from 'mongoose'
 
 
-const userSchema = new Schema({
+const videoSchema = new Schema({
 
-  name: {
+  url: {
     type: String,
     require: true,
     trim: true,
   },
-  lastname: {
+  title: {
     type: String,
     require: true,
     trim: true,
   },
-  email: { 
+  nameStudent: {
+    type: String,
+    require: true,
+    trim: true,
+  },
+  emailTeacher: { 
     type: String, 
-    unique:true, 
     lowercase: true, 
     sparse: true,
     require: true
   },
-  rol: {  
+  description: {  
     type: String,
-    enum : ['student', 'teacher'],
-    require: true
+    require: true,
+    trim: true,
   },
   
 },{
@@ -31,4 +35,4 @@ const userSchema = new Schema({
   versionKey: false,
 });
 
-export default model('User', userSchema);
+export default model('Video', videoSchema);

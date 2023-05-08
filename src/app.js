@@ -9,19 +9,10 @@ const app = express();
 dbConnection();
 
 //middlewares
+app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
-/*module.exports = (schema) => {
-    return async(request, response, next) => {
-        try {
-            await schema.validateAsync(request.body);
-        } catch (error) {
-            response.send(error.messaje)
-        }
-    };
-};*/
 
 // Routes
 app.use(indexRoutes)

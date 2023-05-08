@@ -1,30 +1,30 @@
 import User from '../../../models/users.js'
 
-export const renderUsers = async (request, response, error) => {
-  console.log(request.query.email);
-  if(request.query.email){
-    const users = await User.find({email: request.query.email}).exec();
-    return response.send(users);
+
+export const renderUsers = async (req, res, error) => {
+  console.log(req.query.email);
+  if(req.query.email){
+    const users = await User.find({email: req.query.email}).exec();
+    return res.json(users);
   };
   const user = await User.find().lean()
-  return response.send(user)
+  return res.json(user)
 };
 
-//Get by id
-export const renderUserEdit = async (request, response, error) => {
+//Read by id
+export const renderUserEdit = async (req, res, error) => {
 
   try {
-    const user = await User.exists({email: request.body.email});
-  //connection with front: response.render("edit", {user: user});}
-  } catch (error) {
+    const user = await User.exists({email: req.body.email});
+    res.json("edit", {user: user});
+  }catch (error) {
     console.log(error.message);
   }
-  
-};
+  };
 
-export const userToggleDone = async (request, response, error) => {
+export const userToggleDone = async (req, res, error) => {
 
-  const {id} = request.params;
+  const {id} = req.params;
   
   const user = await User.findById(id);
   
@@ -32,7 +32,7 @@ export const userToggleDone = async (request, response, error) => {
 
   await user.save();
 
-  response.redirect('/');
+  res.redirect('/');
   //se puede realizar una sola consulta, cuando tenga el registro se valida si existe fue evaluado y si 
   //no aparece no está calificado
 }
