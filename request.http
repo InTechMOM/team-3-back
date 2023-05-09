@@ -6,9 +6,13 @@ Content-Type: application/json
 {
   "name": "Karen",
 	"lastname": "Echavarria",
-	"email": "some@example.com",
-	"rol": "student",
+	"email": "some.back@example.com",
+	"rol": "student"
 
 }
 
 ### 
+GET http://localhost:3000/users HTTP/1.1
+
+###
+DELETE http://localhost:3000/user/6454907a716ec753c0892418/delete HTTP/1.1

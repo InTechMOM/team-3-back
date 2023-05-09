@@ -7,11 +7,9 @@ import {
   userToggleDone 
 } from '../controllers/get.js';
 
-import { 
-  createUser, 
-  editUser,
-  deleteOne 
-} from '../controllers/post.js';
+import createUser from '../controllers/post.js';
+import editUser from '../controllers/put.js';
+import deleteOne from '../controllers/del.js'
 
 const router = Router()
 
@@ -23,8 +21,8 @@ router.post('/users', validateCreation, createUser);
 router.post('/user/login')
 
 // Update by id
-router.get('/user/:id/edit',renderUserEdit);
-router.put('/user/:id/edit', validateCreation, editUser);
+router.get('/user',renderUserEdit);
+router.put('/user/:id/edit', editUser);
 
 //Delete User by id
 router.delete('/user/:id/delete', deleteOne)

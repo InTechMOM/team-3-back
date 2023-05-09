@@ -1,7 +1,7 @@
 import User from '../../../models/users.js'
 
 
-export const renderUsers = async (req, res, error) => {
+const renderUsers = async (req, res, error) => {
   console.log(req.query.email);
   if(req.query.email){
     const users = await User.find({email: req.query.email}).exec();
@@ -12,7 +12,7 @@ export const renderUsers = async (req, res, error) => {
 };
 
 //Read by id
-export const renderUserEdit = async (req, res, error) => {
+const renderUserEdit = async (req, res, error) => {
 
   try {
     const user = await User.exists({email: req.body.email});
@@ -20,9 +20,9 @@ export const renderUserEdit = async (req, res, error) => {
   }catch (error) {
     console.log(error.message);
   }
-  };
+};
 
-export const userToggleDone = async (req, res, error) => {
+const userToggleDone = async (req, res, error) => {
 
   const {id} = req.params;
   
@@ -32,7 +32,9 @@ export const userToggleDone = async (req, res, error) => {
 
   await user.save();
 
-  res.redirect('/');
+  res.send('saved');
   //se puede realizar una sola consulta, cuando tenga el registro se valida si existe fue evaluado y si 
   //no aparece no está calificado
 }
+
+export {renderUsers, renderUserEdit, userToggleDone};
