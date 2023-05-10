@@ -18,7 +18,7 @@ const UserLogin = async (req, res, error) => {
     const user = await User.exists({email: req.body.email, rol:req.body.rol});
     console.log(user)
     if(!user){
-      return res.status(403).json({message: 'Not Access'})
+      return res.status(403).json({message: "You don't have permission to access"})
     }
     res.status(200).json({message: 'Access'});
   }catch (error) {

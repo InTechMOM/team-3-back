@@ -7,27 +7,32 @@ const videoSchema = new Schema({
     type: String,
     require: true,
     trim: true,
+    max: 2048,
   },
   title: {
     type: String,
     require: true,
     trim: true,
+    max: 60,
   },
   nameStudent: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'name',
     require: true,
     trim: true,
   },
   emailTeacher: { 
-    type: String, 
+    type: Schema.Types.ObjectId, 
+    ref: 'email',
     lowercase: true, 
     sparse: true,
-    require: true
+    require: true,
   },
   description: {  
     type: String,
     require: true,
     trim: true,
+    max: 1060,
   },
   
 },{

@@ -1,5 +1,6 @@
 import express, { request, response } from 'express';
 import indexRoutes from './api/users/routes/index.routes.js';
+import indexRoutesVideo from './api/videos/routes/index.js'
 import { port } from './config/index.js';
 import dbConnection from './config/db.js';
 import morgan from 'morgan';
@@ -15,7 +16,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Routes
-app.use(indexRoutes)
+app.use(indexRoutes, indexRoutesVideo)
 
 app.listen(port, (error) => {
 

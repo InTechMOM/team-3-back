@@ -1,32 +1,24 @@
-import Joi from 'joi'
+import getUserBy from "../../users/helpers.js";
+import validateVideo from "../validation/post.js";
 
-const createVideoSchema =  Joi.object({
-  url: Joi.string()
-    .required(),
-  title: Joi.string()
-    .required()
-    .min(3)
-    .max(60),
-    nameStudent: Joi.string()
-    .required()
-    .min(3)
-    .max(24),
-    emailTeacher: Joi.string()
-    .email()
-    .required(),
-    description: Joi.string()
-      .required()
-      .min(3)
-      .max(250),
-})
+const createVideo = async (req, res) => {
+  try {
+    const videoToSave = {...req.body};
+    const teacher = await getUserBy({email: req.body.emailTeacher, rol: 'teacher'});
+    const student = await getUserBy({email: req.body.emailStudent, rol: 'student'});
+    console.log(teacher, student);
 
-const validateVideo = async(request, response, next) => {
-  await { createVideoSchema}.validate(request.body);
-  next();
-  try { 
-  } catch (error) {
-    response.send(error);
+  if(!student?.length || !teacher?.length){
+      return res.status(400).json({message: 'Teacher or student incorrect'});
   }
-}
+    //    const video = await Video.create(req.body);
+  res.status(201).json(`${videoToSave} Created`);
+  } catch (error){
+    console.log(error);
+    res.status(400).json({message: 'Your request gives error'});
+  }
+};
 
-export default validateVideo;
+//se consulta el id del profesor 
+//...req.body} objeto que tenga todos los datos de la request
+export default createVideo;

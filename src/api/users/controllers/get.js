@@ -1,4 +1,5 @@
 import User from '../../../models/users.js'
+import getUserBy from '../helpers.js';
 
 
 const renderUsers = async (req, res, error) => {
@@ -15,8 +16,7 @@ const getByName =  async(req,res) =>{
   try {
     const {name} = req.query;
     console.log(name);
-    const studentFound = await User.find({name});
-    console.log(studentFound);
+    const studentFound = await getUserBy(name);
     if(!studentFound.length) {
       return res.status(404).json({message: "OOPS! Not Found"});
     }
