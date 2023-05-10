@@ -1,33 +1,31 @@
 import { Router } from 'express'
-import validateCreation  from '../validation/post.js'
+import {
+  validateCreation,
+  validateLogin}  from '../validation/post.js'
 
-import { 
-  renderUserEdit, 
-  renderUsers, 
-  userToggleDone 
+import {  
+  renderUsers,
+  getByName 
 } from '../controllers/get.js';
 
-import createUser from '../controllers/post.js';
-import editUser from '../controllers/put.js';
-import deleteOne from '../controllers/del.js'
+import {
+  createUser, 
+  UserLogin
+} from '../controllers/post.js';
+import editUser from '../controllers/patch.js';
+import deleteOne from '../controllers/delete.js'
 
 const router = Router()
 
-//Create User
+//User
 router.get('/users', renderUsers);
 router.post('/users', validateCreation, createUser);
+router.patch('/user/:id', validateCreation, editUser);
+router.delete('/user/:id', validateCreation, deleteOne)
 
 //Login
-router.post('/user/login')
+router.post('/user/login', validateLogin, UserLogin);
 
-// Update by id
-router.get('/user',renderUserEdit);
-router.put('/user/:id/edit', editUser);
-
-//Delete User by id
-router.delete('/user/:id/delete', deleteOne)
-
-//Toggle Done
-router.get('/user/:id/toggleDone', userToggleDone);
+router.get('/user',getByName);
 
 export default router;

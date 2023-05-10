@@ -36,4 +36,14 @@ const validateCreation = async(request, response, next) => {
   }
 }
 
-export default validateCreation;
+const validateLogin = async(request, response, next) => {
+  await loginUserSchema.validate(request.body);
+  next();
+  try { 
+  } catch (error) {
+    response.send(error);
+  }
+}
+
+
+export {validateCreation, validateLogin};

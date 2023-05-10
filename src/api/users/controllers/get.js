@@ -11,30 +11,20 @@ const renderUsers = async (req, res, error) => {
   return res.json(user)
 };
 
-//Read by id
-const renderUserEdit = async (req, res, error) => {
-
+const getByName =  async(req,res) =>{
   try {
-    const user = await User.exists({email: req.body.email});
-    res.json("edit", {user: user});
-  }catch (error) {
-    console.log(error.message);
+    const {name} = req.query;
+    console.log(name);
+    const studentFound = await User.find({name});
+    console.log(studentFound);
+    if(!studentFound.length) {
+      return res.status(404).json({message: "OOPS! Not Found"});
+    }
+    res.status(200).json(studentFound)  
+    
+  } catch (error) {
+    res.status(500).json('Internal Server Error')  
   }
 };
 
-const userToggleDone = async (req, res, error) => {
-
-  const {id} = req.params;
-  
-  const user = await User.findById(id);
-  
-  user.done = !user.done;
-
-  await user.save();
-
-  res.send('saved');
-  //se puede realizar una sola consulta, cuando tenga el registro se valida si existe fue evaluado y si 
-  //no aparece no está calificado
-}
-
-export {renderUsers, renderUserEdit, userToggleDone};
+export {renderUsers, getByName};
