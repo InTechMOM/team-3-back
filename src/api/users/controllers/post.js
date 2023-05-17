@@ -1,4 +1,6 @@
-import User from '../../../models/users.js'
+import User from '../../../models/users.js';
+import jwt  from 'jsonwebtoken';
+import { generateToken } from '../utils/tokenManager.js';
 
 
 /**
@@ -14,11 +16,9 @@ import User from '../../../models/users.js'
  */
 const createUser = async (req, res) => {
   try {
-    console.log(req.body);
     const user = await User.create(req.body);
     res.status(201).json(`${user} Created`);
   } catch (error){
-    console.log(error);
     res.status(400).json({message: 'Your request gives error'});
   }
 };
@@ -28,13 +28,18 @@ const UserLogin = async (req, res, error) => {
 
   try {
     const user = await User.exists({email: req.body.email, rol:req.body.rol});
-    console.log(user)
     if(!user){
       return res.status(403).json({message: "You don't have permission to access"})
     }
-    res.status(200).json({message: 'Access'});
+    
+    //Generar token JWT
+    const {token, expiresIn} = generateToken(user.id)
+    //generateRefreshToken(user.id, res);
+
+    return res.status(200).json({token, expiresIn});
   }catch (error) {
-    res.status(400).json({message: 'Invalid Access'})
+    console.log(error);
+    return res.status(400).json({message: 'Invalid Access'})
   }
 };
 

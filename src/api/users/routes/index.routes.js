@@ -6,7 +6,8 @@ import {
 
 import {  
   renderUsers,
-  getByName 
+  getByName,
+  infoUser,
 } from '../controllers/get.js';
 
 import {
@@ -15,6 +16,7 @@ import {
 } from '../controllers/post.js';
 import editUser from '../controllers/patch.js';
 import deleteOne from '../controllers/delete.js'
+import { requireToken } from '../middelware/requireToken.js';
 
 const router = Router()
 
@@ -25,9 +27,10 @@ router
   .post('/users', validateCreation, createUser)
   .patch('/user/:id', validatePatch, editUser)
   .delete('/user/:id', validateCreation, deleteOne)
-
-//Login
-  .post('/user/login', validateLogin, UserLogin);
+  
+  //Login
+  .get('/protected', requireToken ,infoUser)
+  .post('/login', validateLogin, UserLogin);
 
 
 export default router;

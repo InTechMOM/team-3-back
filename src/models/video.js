@@ -7,13 +7,13 @@ const videoSchema = new Schema({
     type: String,
     require: true,
     trim: true,
-    max: 2048,
+    maxLength: 2048,
   },
   title: {
     type: String,
     require: true,
     trim: true,
-    max: 60,
+    maxLength: 60,
   },
   studentName: {
     type: Schema.Types.ObjectId,
@@ -38,7 +38,7 @@ const videoSchema = new Schema({
     type: String,
     require: true,
     trim: true,
-    max: 1060,
+    maxLength: 1060,
   },
   
 },{

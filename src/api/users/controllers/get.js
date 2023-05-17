@@ -19,7 +19,6 @@ const renderUsers = async (req, res, error) => {
 const getByName =  async(req,res) =>{
   try {
     const {name} = req.query;
-    console.log(name);
     const studentFound = await getUserBy(name);
     if(!studentFound.length) {
       return res.status(404).json({message: "OOPS! Not Found"});
@@ -31,7 +30,16 @@ const getByName =  async(req,res) =>{
   }
 };
 
+const infoUser = async(req, res) => {
+  try {
+    
+  } catch (error) {
+    res.json({email: "some@example.com"});
+  }
+}
+
 export {
   renderUsers, 
-  getByName
+  getByName,
+  infoUser
 };

@@ -2,8 +2,10 @@ import { Router } from 'express';
 import validateVideo from '../Validation/post.js';
 import createVideo from '../controllers/post.js';
 
-const routerVideo = Router();
+const router = Router();
 
-routerVideo.post('/video', validateVideo, createVideo);
+router
+  .get('/video')
+  .post('/videos', validateVideo, createVideo)
 
-export default routerVideo;
+export default router;
