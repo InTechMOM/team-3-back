@@ -1,22 +1,29 @@
 import express, { request, response } from 'express';
+import swaggerUi from 'swagger-ui-express';
 import indexRoutes from './api/users/routes/index.routes.js';
-import indexRoutesVideo from './api/videos/routes/index.js'
+import indexRoutesVideo from './api/videos/routes/index.js';
 import { port } from './config/index.js';
 import dbConnection from './config/db.js';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
+import { openApiSpecification } from './config/swagger.js';
 
 const app = express();
-dbConnection();
 
 //middlewares
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
-app.use(bodyParser.json());
+
+dbConnection();
 
 // Routes
-app.use(indexRoutes, indexRoutesVideo)
+app.use(indexRoutes, indexRoutesVideo);
+
+// Swagger
+app.use('/docs', swaggerUi.serve);
+app.get('/docs', swaggerUi.setup(openApiSpecification));
+
 
 app.listen(port, (error) => {
 

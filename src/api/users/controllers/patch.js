@@ -10,8 +10,7 @@ const editUser = async (req, res) => {
     },{
        $set:
        { ...name && {name}, 
-        ...lastname && {lastname},  
-        ...rol && {rol}
+        ...lastname && {lastname}
       }
     })
     .then((data) => res.status(201).json('Created'))

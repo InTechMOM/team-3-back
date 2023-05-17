@@ -1,5 +1,17 @@
 import User from '../../../models/users.js'
 
+
+/**
+ * @openapi
+ * /user:
+ *   post:
+ *     description: Creation API for users
+ *     responses:
+ *       200:
+ *         description: User created
+ *       400:
+ *        description: Bad request
+ */
 const createUser = async (req, res) => {
   try {
     console.log(req.body);
@@ -27,4 +39,7 @@ const UserLogin = async (req, res, error) => {
 };
 
 
-export {createUser, UserLogin};
+export {
+  createUser, 
+  UserLogin
+};

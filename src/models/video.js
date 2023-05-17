@@ -15,11 +15,17 @@ const videoSchema = new Schema({
     trim: true,
     max: 60,
   },
-  nameStudent: {
+  studentName: {
     type: Schema.Types.ObjectId,
-    ref: 'name',
     require: true,
     trim: true,
+  },
+  emailStudent: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'email',
+    lowercase: true, 
+    sparse: true,
+    require: true,
   },
   emailTeacher: { 
     type: Schema.Types.ObjectId, 

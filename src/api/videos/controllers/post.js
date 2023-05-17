@@ -1,5 +1,5 @@
-import getUserBy from "../../users/helpers.js";
-import validateVideo from "../validation/post.js";
+import getUserBy from '../../users/helpers.js';
+import Video from '../../../models/video.js';
 
 const createVideo = async (req, res) => {
   try {
@@ -8,10 +8,13 @@ const createVideo = async (req, res) => {
     const student = await getUserBy({email: req.body.emailStudent, rol: 'student'});
     console.log(teacher, student);
 
-  if(!student?.length || !teacher?.length){
-      return res.status(400).json({message: 'Teacher or student incorrect'});
-  }
-    //    const video = await Video.create(req.body);
+  if(
+    !student?.length || 
+    !teacher?.length
+    ) {
+      return res.status(400).json({message: 'Incorrect teacher or student'});
+    }
+  const video = await Video.create(req.body);
   res.status(201).json(`${videoToSave} Created`);
   } catch (error){
     console.log(error);

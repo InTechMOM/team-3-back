@@ -18,6 +18,17 @@ const createUserSchema = Joi.object({
     .required(),
 });
 
+const patchUserSchema = Joi.object({
+  name: Joi.string()
+    .required()
+    .min(3)
+    .max(24),
+  lastname: Joi.string()
+    .required()
+    .min(3)
+    .max(24)
+});
+
 const loginUserSchema = Joi.object({
   email: Joi.string()
     .email()
@@ -34,6 +45,14 @@ const validateCreation = async(request, response, next) => {
   } catch (error) {
     response.send(error);
   }
+};
+const validatePatch = async(request, response, next) => {
+  await patchUserSchema.validate(request.body);
+  next();
+  try { 
+  } catch (error) {
+    response.send(error);
+  }
 }
 
 const validateLogin = async(request, response, next) => {
@@ -43,7 +62,13 @@ const validateLogin = async(request, response, next) => {
   } catch (error) {
     response.send(error);
   }
-}
+};
 
 
-export {validateCreation, validateLogin};
+
+
+export {
+  validateCreation, 
+  validatePatch,
+  validateLogin,
+};

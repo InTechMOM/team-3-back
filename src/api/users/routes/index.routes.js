@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import {
   validateCreation,
+  validatePatch,
   validateLogin}  from '../validation/post.js'
 
 import {  
@@ -17,15 +18,16 @@ import deleteOne from '../controllers/delete.js'
 
 const router = Router()
 
-//User
-router.get('/users', renderUsers);
-router.post('/users', validateCreation, createUser);
-router.patch('/user/:id', validateCreation, editUser);
-router.delete('/user/:id', validateCreation, deleteOne)
+//Users
+router
+  .get('/users', renderUsers)
+  .get('/user',getByName)
+  .post('/users', validateCreation, createUser)
+  .patch('/user/:id', validatePatch, editUser)
+  .delete('/user/:id', validateCreation, deleteOne)
 
 //Login
-router.post('/user/login', validateLogin, UserLogin);
+  .post('/user/login', validateLogin, UserLogin);
 
-router.get('/user',getByName);
 
 export default router;
