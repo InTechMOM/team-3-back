@@ -21,7 +21,7 @@ const createVideo = async (req, res) => {
   return res.status(201).json(`${video} Created`);
   } catch (error){
     console.log(error);
-    return res.status(400).json({message: 'Your request gives error'});
+    return res.status(500).json({message: 'Your request gives error'});
   }
 };
 
