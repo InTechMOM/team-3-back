@@ -26,15 +26,38 @@ const createVideoSchema =  Joi.object({
     .required()
     .min(3)
     .max(250),
-})
+});
+
+const patchUserSchema = Joi.object({
+  title: Joi.string()
+    .required()
+    .min(3)
+    .max(60),
+    description: Joi.string()
+    .required()
+    .min(3)
+    .max(250),
+});
 
 const validateVideo = async(request, response, next) => {
   await createVideoSchema.validate(request.body);
   next();
   try { 
   } catch (error) {
-    response.status(400).send('Unvalidated');
+    response.status(400).send('Unvalidated')
+  }
+};
+
+const validatePatch = async(request, response, next) => {
+  await patchUserSchema.validate(request.body);
+  next();
+  try { 
+  } catch (error) {
+    response.send(error);
   }
 }
 
-export default validateVideo;
+export {
+  validateVideo,
+  validatePatch,
+};

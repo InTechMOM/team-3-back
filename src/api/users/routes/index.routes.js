@@ -7,7 +7,6 @@ import {
 import {  
   renderUsers,
   getByName,
-  infoUser,
 } from '../controllers/get.js';
 
 import {
@@ -16,7 +15,6 @@ import {
 } from '../controllers/post.js';
 import editUser from '../controllers/patch.js';
 import deleteOne from '../controllers/delete.js'
-import { requireToken } from '../middelware/requireToken.js';
 
 const router = Router()
 
@@ -29,7 +27,6 @@ router
   .delete('/user/:id', validateCreation, deleteOne)
   
   //Login
-  .get('/protected', requireToken ,infoUser)
   .post('/login', validateLogin, UserLogin);
 
 

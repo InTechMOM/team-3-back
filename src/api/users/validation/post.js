@@ -46,6 +46,7 @@ const validateCreation = async(request, response, next) => {
     response.send(error);
   }
 };
+
 const validatePatch = async(request, response, next) => {
   await patchUserSchema.validate(request.body);
   next();
@@ -53,7 +54,7 @@ const validatePatch = async(request, response, next) => {
   } catch (error) {
     response.send(error);
   }
-}
+};
 
 const validateLogin = async(request, response, next) => {
   await loginUserSchema.validate(request.body);
@@ -63,8 +64,6 @@ const validateLogin = async(request, response, next) => {
     response.send(error);
   }
 };
-
-
 
 
 export {

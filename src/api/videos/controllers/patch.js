@@ -2,19 +2,26 @@ import Video from '../../../models/video.js'
 
 const editVideo = async (req, res) => {
 
-  const { id } = req.params;
-  const {body} = req.body;
-  await Video
-    .updateOne({
-      _id: id
-    },{
-       $set:
-       { ...title && {title}, 
+  try {
+    const { id } = req.params;
+    const {title, description} = req.body;
+    const video = await Video.updateOne({_id: id},
+      {
+        $set:
+        { ...title && {title}, 
         ...description && {description}
       }
     })
-    .then((data) => res.status(201).json('Created'))
-    .catch((error) => res.status(400).json({message: 'Your request gives error'}));
+    console.log(video);
+    if(!video){
+    return res.status(400).json({message: 'Your request gives error'});
+    }
+    return res.status(201).json('Created');
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json('Internal Server Error');
+  }
   
 };
 

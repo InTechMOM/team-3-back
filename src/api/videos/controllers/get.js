@@ -26,5 +26,20 @@ const renderVideos = async (req, res, error) => {
   }
 };
 
+const getByVideo =  async(req,res) =>{
+  try {
+    const {id} = req.params;
+    const videoFound = await findOne({_id: id});
+    if(!videotFound) {
+      return res.status(404).json({message: "OOPS! Not Found"});
+    }
+    res.status(200).json(videotFound)  
+    
+  } catch (error) {
+    res.status(500).json('Internal Server Error')  
+  }
+};
 
-export default renderVideos;
+
+
+export {renderVideos, getByVideo};

@@ -5,6 +5,7 @@ const videoSchema = new Schema({
 
   url: {
     type: String,
+    unique: true,
     require: true,
     trim: true,
     maxLength: 2048,

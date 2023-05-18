@@ -30,16 +30,9 @@ const getByName =  async(req,res) =>{
   }
 };
 
-const infoUser = async(req, res) => {
-  try {
-    
-  } catch (error) {
-    res.json({email: "some@example.com"});
-  }
-}
+
 
 export {
   renderUsers, 
   getByName,
-  infoUser
 };

@@ -1,6 +1,4 @@
 import User from '../../../models/users.js';
-import jwt  from 'jsonwebtoken';
-import { generateToken } from '../utils/tokenManager.js';
 
 
 /**
@@ -31,12 +29,8 @@ const UserLogin = async (req, res, error) => {
     if(!user){
       return res.status(403).json({message: "You don't have permission to access"})
     }
-    
-    //Generar token JWT
-    const {token, expiresIn} = generateToken(user.id)
-    //generateRefreshToken(user.id, res);
 
-    return res.status(200).json({token, expiresIn});
+    return res.status(200).json({message: 'Access'});
   }catch (error) {
     console.log(error);
     return res.status(400).json({message: 'Invalid Access'})
