@@ -1,4 +1,3 @@
-import { query } from 'express';
 import Video from '../../../models/video.js'
 
 const renderVideos = async (req, res, error) => {
@@ -19,6 +18,7 @@ const renderVideos = async (req, res, error) => {
       return res.status(400).json('Invalid');
     };
     const video = await Video.find(filters).exec();
+    console.log(video)
     return res.status(200).json(`${video} status: ok`)
     
   } catch (error) {
@@ -30,10 +30,10 @@ const getByVideo =  async(req,res) =>{
   try {
     const {id} = req.params;
     const videoFound = await findOne({_id: id});
-    if(!videotFound) {
+    if(!videoFound) {
       return res.status(404).json({message: "OOPS! Not Found"});
     }
-    res.status(200).json(videotFound)  
+    res.status(200).json(videoFound)  
     
   } catch (error) {
     res.status(500).json('Internal Server Error')  

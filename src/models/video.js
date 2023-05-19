@@ -17,19 +17,19 @@ const videoSchema = new Schema({
     maxLength: 60,
   },
   studentName: {
-    type: Schema.Types.ObjectId,
+    type: String,
     require: true,
     trim: true,
   },
   emailStudent: { 
-    type: Schema.Types.ObjectId, 
+    type: String, 
     ref: 'email',
     lowercase: true, 
     sparse: true,
     require: true,
   },
   emailTeacher: { 
-    type: Schema.Types.ObjectId, 
+    type: String, 
     ref: 'email',
     lowercase: true, 
     sparse: true,

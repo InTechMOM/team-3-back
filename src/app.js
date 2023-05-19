@@ -18,7 +18,10 @@ app.use(express.urlencoded({extended: false}));
 dbConnection();
 
 // Routes
-app.use(indexRoutes, indexRoutesVideo);
+app.use(
+    indexRoutes, 
+    indexRoutesVideo
+    );
 
 // Swagger
 app.use('/docs', swaggerUi.serve);

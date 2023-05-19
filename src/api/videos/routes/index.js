@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {validateVideo, validatePatch} from '../Validation/post.js';
+import {validateVideo, validatePatch} from '../validation/post.js';
 import createVideo from '../controllers/post.js';
 import  { 
   renderVideos, 
