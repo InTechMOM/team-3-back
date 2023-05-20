@@ -3,7 +3,7 @@ import User from '../../../models/users.js';
 
 /**
  * @openapi
- * /user:
+ * /users:
  *   post:
  *     description: Creation API for users
  *     responses:

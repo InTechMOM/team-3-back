@@ -13,9 +13,9 @@ const createVideoSchema =  Joi.object({
     .min(3)
     .max(60),
   studentName: Joi.string()
-  .required()
-  .min(3)
-  .max(60),
+    .required()
+    .min(3)
+    .max(60),
   studentEmail: Joi.string()
     .email()
     .required(),
