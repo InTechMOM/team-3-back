@@ -1,17 +1,5 @@
 import User from '../../../models/users.js';
 
-
-/**
- * @openapi
- * /users:
- *   post:
- *     description: Creation API for users
- *     responses:
- *       200:
- *         description: User created
- *       400:
- *        description: Bad request
- */
 const createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
