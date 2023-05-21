@@ -1,4 +1,5 @@
 import swaggerJSDoc from "swagger-jsdoc";
+import path from 'path';
 
 const swaggerOptions = {
   definition: {
@@ -7,11 +8,16 @@ const swaggerOptions = {
       title: 'MVP IntechMom',
       version: '1.0.0',
     },
+    servers:[
+      {
+      url:'http://localhost:3000'
+      }
+    ]
   },
   apis: [
     'app.js',
-    './src/api/users/controllers/post.js'
-  ], // files containing annotations as above
+    './src/api/users/controllers/*.js'
+   ], // files containing annotations as above
 };
 
 export const openApiSpecification = swaggerJSDoc(swaggerOptions);

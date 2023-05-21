@@ -13,13 +13,14 @@ const renderVideos = async (req, res, error) => {
       ...studentName && {studentName},
       ...emailStudent && {emailStudent},
       ...emailTeacher && {emailTeacher},
+      ...description && {description},
     }
     if(!filters){
       return res.status(400).json('Invalid');
     };
     const video = await Video.find(filters).exec();
     console.log(video)
-    return res.status(200).json(`${video} status: ok`)
+    return res.status(200).json(video)
     
   } catch (error) {
     res.status(500).json('Internal Server Error')  
