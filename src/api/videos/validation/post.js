@@ -33,7 +33,7 @@ const patchUserSchema = Joi.object({
     .required()
     .min(3)
     .max(60),
-    description: Joi.string()
+  description: Joi.string()
     .required()
     .min(3)
     .max(250),
