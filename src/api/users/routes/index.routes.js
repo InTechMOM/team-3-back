@@ -39,12 +39,40 @@ const router = Router()
  *            format: email
  *          rol:
  *            type: string
- *            enum: [student, teacher]
+ *            enum:
+ *              - student
+ *              - teacher
  *        example:
  *          name: Brendan
  *          lastname: Each
  *          email: brendan@email.com
  *          rol: teacher
+ * 
+ *      Patch:
+ *        type: object
+ *        required:
+ *          - name
+ *          - lastname
+ *        properties:
+ *          name:
+ *            type: string
+ *          lastname:
+ *            type: string
+ * 
+ *      Login:
+ *        type: object
+ *        required:
+ *          - email
+ *          - rol
+ *        properties:
+ *          email:
+ *            type: string
+ *            format: email
+ *          rol:
+ *            type: string
+ *            enum:
+ *              - student
+ *              - teacher
  */
 
 //Users
@@ -64,7 +92,7 @@ const router = Router()
  *            type: object
  *            $ref: '#components/schema/User'
  *    responses:
- *      200:
+ *      201:
  *        description: new user created
  *      400:
  *        description: Bad request
@@ -74,7 +102,6 @@ const router = Router()
  * @swagger
  * /users:
  *   get:
- *    description: Creation API for users
  *    summary: return all users
  *    tags: [User]
  *    responses:
@@ -94,22 +121,99 @@ const router = Router()
  * @swagger
  * /user:
  *   get:
- *    description: Creation API for users
- *    summary: return user
+ *    summary: return a user
  *    tags: [User]
+ *    parameters:
+ *      - name: name
+ *        in: query
+ *        description: search by name
+ *        schema: 
+ *          type: string
+ *        required: true
  *    responses:
  *      200:
- *        description: all users
+ *        description: the user name
  *        content:
- *          application/json:
- *            schema:
- *              type: array
- *              items:
+ *            application/json:
+ *              schema:
+ *                type: objet
  *                $ref: '#components/schema/User'
+ *      404: 
+ *        description: OOPS! Not Found
  *      500:
  *        description: Internal Server Error
  */
 
+/**
+ * @swagger
+ * /user/{id}:
+ *   patch:
+ *    summary: update a user
+ *    tags: [User]
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        description: the user id
+ *        schema: 
+ *          type: string
+ *        required: true
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#components/schema/Patch'
+ *    responses:
+ *      200:
+ *        description: user updated
+ *      400: 
+ *        description: Your request gives error
+ */
+
+/**
+ * @swagger
+ * /user/{id}:
+ *   delete:
+ *    summary: delete a user
+ *    tags: [User]
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        description: the user id
+ *        schema: 
+ *          type: string
+ *        required: true
+ *    responses:
+ *      200:
+ *        description: user delete
+ *      404: 
+ *        description: OOPS! Not Found
+ */
+
+//Login
+/**
+ * @swagger
+ * /users:
+ *   post:
+ *    description: Login
+ *    summary: login user
+ *    tags: [User]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#components/schema/Login'
+ *    responses:
+ *      200:
+ *        description: Access
+ *      403:
+ *        description: You don't have permission to access
+ *      400:
+ *        description: Invalid Access
+ */
 
 router
   .post('/users', validateCreation, createUser)

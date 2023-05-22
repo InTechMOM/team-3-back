@@ -13,7 +13,7 @@ const editUser = async (req, res) => {
         ...lastname && {lastname}
       }
     })
-    .then((data) => res.status(201).json('Created'))
+    .then((data) => res.status(200).json('User updated'))
     .catch((error) => res.status(400).json({message: 'Your request gives error'}));
   
 };
