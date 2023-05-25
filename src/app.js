@@ -1,21 +1,38 @@
-import express from 'express';
+import express, { request, response } from 'express';
+import swaggerUi from 'swagger-ui-express';
+import indexRoutes from './api/users/routes/index.routes.js';
+import indexRoutesVideo from './api/videos/routes/index.js';
 import { port } from './config/index.js';
-import Database from './config/db.js';
+import dbConnection from './config/db.js';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import { openApiSpecification } from './config/swagger.js';
 
 const app = express();
-const db = new Database();
 
-app.get('/', (request, response, error) => {
+//middlewares
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(express.urlencoded({extended: false}));
 
-    response.send('status: ok')
+dbConnection();
 
-})
+// Routes
+app.use(
+    indexRoutes, 
+    indexRoutesVideo
+    );
+
+// Swagger
+app.use('/docs', swaggerUi.serve);
+app.get('/docs', swaggerUi.setup(openApiSpecification));
+
 
 app.listen(port, (error) => {
 
     if(error){
-        console.log('Server errror: Failed')
-        process.exit(1)
+        console.log('Server errror: Failed');
+        process.exit(1);
     }
     
     console.log(`Server listening in port ${port} `)
