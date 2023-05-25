@@ -26,6 +26,7 @@ const router = Router();
  *        properties:
  *          url:
  *            type: string
+ *            format: uri
  *          title:
  *            type: string
  *          studentName:
@@ -138,7 +139,7 @@ const router = Router();
  * @swagger
  * /video/{id}:
  *   patch:
- *    summary: update a user
+ *    summary: patch a user
  *    tags: [User]
  *    parameters:
  *      - name: id
@@ -178,7 +179,7 @@ const router = Router();
  *        required: true
  *    responses:
  *      200:
- *        description: user delete
+ *        description: video delete
  *      404: 
  *        description: OOPS! Not Found
  */
