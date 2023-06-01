@@ -58,6 +58,9 @@ const router = Router()
  *            type: string
  *          lastname:
  *            type: string
+ *        example:
+ *          name: Carolina
+ *          lastname: Cordoba
  * 
  *      Login:
  *        type: object
@@ -73,6 +76,9 @@ const router = Router()
  *            enum:
  *              - student
  *              - teacher
+ *          example:
+ *            email: brendan@email.com
+ *            rol: teacher
  */
 
 //Users

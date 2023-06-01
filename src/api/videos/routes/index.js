@@ -37,8 +37,15 @@ const router = Router();
  *          emailTeacher:
  *            type: string
  *            format: email
- *          title:
+ *          description:
  *            type: string
+ *         example:
+ *           url: https://www.youtube.com/watch?v=TjqrualxgkI
+ *           title: La neurociencia de las emociones
+ *           studentName: Carolina Cordoba
+ *           emailStudent: student@email.com
+ *           emailTeacher: teacher@email.com
+ *           description: Explica cómo la comprensión del funcionamiento de nuestro cerebro y organismo nos ayuda a vivir una vida más consciente.
  * 
  *      PatchVideo:
  *        type: object
@@ -50,6 +57,9 @@ const router = Router();
  *            type: string
  *          description:
  *            type: string
+ *        example:
+ *          title: Versión Completa. La neurociencia de las emociones. Marian Rojas-Estapé, psiquiatra y escritora
+ *          description: “Comprender es aliviar, y cuando comprendes por lo que pasa tu mente, te sientes aliviado; porque si no, eres esclavo de síntomas físicos, psicológicos y vas como perdido por la vida”, reflexiona.
  */
 
 //Videos

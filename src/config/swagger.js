@@ -10,7 +10,8 @@ const swaggerOptions = {
     },
     servers:[
       {
-      url:'http://localhost:3000'
+      url:'http://localhost:3000',
+      url:'https://team-3-back.onrender.com/docs'
       }
     ]
   },
